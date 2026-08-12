@@ -25,3 +25,7 @@
 .icon {
   color: rgb(160, 160, 160);
 }
+
+.container:hover {
+  background-color: rgb(58, 58, 58);
+}
