@@ -1,7 +1,13 @@
 import styles from "./SideBar.module.css";
-import { IconButton } from "../IconButton/IconButton";
 import { Divider } from "../Divider/Divider";
 import { ProfileIcon } from "../ProfileIcon/ProfileIcon";
+import { StatusIconButton } from "../IconButtons/StatusIconButton";
+import { ChatIconButton } from "../IconButtons/ChatIconButton";
+import { PhoneIconButton } from "../IconButtons/PhoneIconButton";
+import { ChannelsIconButton } from "../IconButtons/ChannelsIconButton";
+import { CommunityIconButton } from "../IconButtons/CommunityIconButton";
+import { MetaIconButton } from "../IconButtons/MetaIconButton";
+import { MidiaIconButton } from "../IconButtons/MidiaIconButton";
 
 interface SideBarProps {
   onSelect: (page: string) => void;
@@ -13,55 +19,31 @@ export function SideBar({ onSelect, activePage, avatarUrl }: SideBarProps) {
   return (
     <div className={styles.container}>
       <div className={styles.divContainer}>
-        <IconButton
-          src="/icons/chat.png"
-          srcSelected="/icons/chat_selected.png"
-          alt="Ícone de Chat"
+        <ChatIconButton
           selected={activePage === "chat"}
           onClick={() => onSelect("chat")}
         />
-        <IconButton
-          src="/icons/phone.png"
-          srcSelected="/icons/phone_selected.png"
-          alt="Ícone de Calls"
+        <PhoneIconButton
           selected={activePage === "calls"}
           onClick={() => onSelect("calls")}
         />
-        <IconButton
-          src="/icons/status.png"
-          srcSelected="/icons/status_selected.png"
-          alt="Ícone de Status"
+        <StatusIconButton
           selected={activePage === "status"}
           onClick={() => onSelect("status")}
         />
-        <IconButton
-          src="/icons/channels.png"
-          srcSelected="/icons/channels_selected.png"
-          alt="Ícone de Channels"
+        <ChannelsIconButton
           selected={activePage === "channels"}
           onClick={() => onSelect("channels")}
         />
-        <IconButton
-          src="/icons/community.png"
-          srcSelected="/icons/community_selected.png"
-          alt="Ícone de Community"
+        <CommunityIconButton
           selected={activePage === "communities"}
           onClick={() => onSelect("communities")}
         />
         <Divider />
-        <IconButton
-          src="/icons/meta-ai-logo.png"
-          srcSelected="/icons/meta-ai-logo.png"
-          alt="Ícone da Meta AI"
-          selected={activePage === "metaAi"}
-          onClick={() => onSelect("metaAi")}
-        />
+        <MetaIconButton />
       </div>
       <div className={styles.divContainer}>
-        <IconButton
-          src="/icons/midia.png"
-          srcSelected="/icons/midia_selected.png"
-          alt="Ícone de Midia"
+        <MidiaIconButton
           selected={activePage === "midia"}
           onClick={() => onSelect("midia")}
         />
