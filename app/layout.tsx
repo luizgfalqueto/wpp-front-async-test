@@ -3,7 +3,7 @@ import "./globals.css";
 import "./reset.css";
 
 export const metadata: Metadata = {
-  title: "WhatsApp Web",
+  title: "WhatsApp",
   description: "WhatsApp Web Clone",
 };
 

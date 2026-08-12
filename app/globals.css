@@ -1,6 +1,6 @@
 :root {
   /* WhatsApp Web Colors (Light) */
-  --whatsapp-primary: #00a884;
+  --whatsapp-primary: #25d366;
   --whatsapp-background: #efeae2;
   --whatsapp-bubble-sent: #d9fdd3;
   --whatsapp-bubble-received: #ffffff;
@@ -8,7 +8,7 @@
   --whatsapp-text-secondary: #667781;
 
   /* WhatsApp Web Colors (Dark) */
-  --whatsapp-dark-primary: #00a884;
+  --whatsapp-dark-primary: #25d366;
   --whatsapp-dark-background: #1d1f1f;
   --whatsapp-dark-bubble-sent: #005c4b;
   --whatsapp-dark-bubble-received: #202c33;
