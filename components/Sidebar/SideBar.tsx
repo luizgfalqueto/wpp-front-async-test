@@ -6,9 +6,10 @@ import { ProfileIcon } from "../ProfileIcon/ProfileIcon";
 interface SideBarProps {
   onSelect: (page: string) => void;
   activePage: string;
+  avatarUrl?: string;
 }
 
-export function SideBar({ onSelect, activePage }: SideBarProps) {
+export function SideBar({ onSelect, activePage, avatarUrl }: SideBarProps) {
   return (
     <div className={styles.container}>
       <div className={styles.divContainer}>
@@ -64,7 +65,10 @@ export function SideBar({ onSelect, activePage }: SideBarProps) {
           selected={activePage === "midia"}
           onClick={() => onSelect("midia")}
         />
-        <ProfileIcon onClick={() => onSelect("profile")} />
+        <ProfileIcon
+          onClick={() => onSelect("profile")}
+          avatarUrl={avatarUrl}
+        />
       </div>
     </div>
   );

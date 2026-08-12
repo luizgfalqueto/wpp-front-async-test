@@ -1,3 +1,8 @@
+"use client";
+
+import { useUserStore } from "../../stores/useStore";
+
 export default function Home() {
-  return <h1>Home</h1>;
+  const user = useUserStore((state) => state.user);
+  return <h1>{user?.name}</h1>;
 }

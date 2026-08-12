@@ -2,14 +2,51 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "../stores/useStore";
 
 import Image from "next/image";
 import styles from "./Loading.module.css";
 import { ProgressBar } from "..//components/ProgressBar/ProgressBar";
 
+async function getUser() {
+  try {
+    const response = await fetch("http://localhost:3001/currentUser");
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    const userData = await response.json();
+
+    const user = {
+      name: userData["name"],
+      phone: userData["phone"],
+      avatarUrl: userData["avatarUrl"],
+    };
+
+    return user;
+  } catch {
+    return null;
+  }
+}
+
 export default function Loading() {
   const [progress, setProgress] = useState<number>(0);
+  const [userLoaded, setUserLoaded] = useState(false);
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
+
+  useEffect(() => {
+    async function loadUser() {
+      const user = await getUser();
+
+      if (user != null) {
+        setUser(user);
+        setUserLoaded(true);
+      }
+    }
+
+    loadUser();
+  }, [setUser]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -34,10 +71,10 @@ export default function Loading() {
   }, []);
 
   useEffect(() => {
-    if (progress >= 100) {
+    if (progress >= 100 && userLoaded) {
       router.push("/home");
     }
-  }, [progress, router]);
+  }, [progress, userLoaded, router]);
 
   return (
     <main className={styles.container}>
