@@ -1,0 +1,15 @@
+.container {
+  width: 200;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--whatsapp-dark-primary);
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}

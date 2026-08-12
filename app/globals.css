@@ -1,26 +1,37 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* WhatsApp Web Colors (Light) */
+  --whatsapp-primary: #00a884;
+  --whatsapp-background: #efeae2;
+  --whatsapp-bubble-sent: #d9fdd3;
+  --whatsapp-bubble-received: #ffffff;
+  --whatsapp-text-primary: #111b21;
+  --whatsapp-text-secondary: #667781;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* WhatsApp Web Colors (Dark) */
+  --whatsapp-dark-primary: #00a884;
+  --whatsapp-dark-background: #1d1f1f;
+  --whatsapp-dark-bubble-sent: #005c4b;
+  --whatsapp-dark-bubble-received: #202c33;
+  --whatsapp-dark-text-primary: #e9edef;
+  --whatsapp-dark-text-secondary: #888888;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* WhatsApp Web Fonts */
+  --font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--whatsapp-background);
+  color: var(--whatsapp-text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--whatsapp-dark-background);
+    color: var(--whatsapp-dark-text-primary);
+  }
 }
