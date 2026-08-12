@@ -6,6 +6,7 @@ interface IconButtonProps {
   srcSelected: string;
   alt: string;
   selected?: boolean;
+  onClick?: () => void;
 }
 
 export function IconButton({
@@ -13,16 +14,17 @@ export function IconButton({
   srcSelected,
   alt,
   selected,
+  onClick,
 }: IconButtonProps) {
   const className = selected ? styles.iconButtonSelected : styles.iconButton;
 
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <Image
         src={selected ? srcSelected : src}
         alt={alt}
-        width={24}
-        height={24}
+        width={22}
+        height={22}
       />
     </div>
   );

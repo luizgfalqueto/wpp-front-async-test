@@ -1,9 +1,13 @@
 import Image from "next/image";
 import styles from "./ProfileIcon.module.css";
 
-export function ProfileIcon() {
+interface ProfileIconProps {
+  onClick?: () => void;
+}
+
+export function ProfileIcon({ onClick }: ProfileIconProps) {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onClick}>
       <Image
         src="/images/person.jpg"
         alt="Profile"
