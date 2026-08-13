@@ -31,6 +31,7 @@ export function CommunityIconButton({ onClick, selected }: ProfileIconProps) {
           clipRule="evenodd"
         />
       </svg>
+      <span className={styles.tooltip}>Comunidades</span>
     </div>
   );
 }

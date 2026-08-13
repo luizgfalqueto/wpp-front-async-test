@@ -10,6 +10,7 @@ export function MetaIconButton() {
         width={22}
         height={22}
       />
+      <span className={styles.tooltip}>Meta AI</span>
     </div>
   );
 }

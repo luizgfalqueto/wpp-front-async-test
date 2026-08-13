@@ -26,6 +26,7 @@ export function StatusIconButton({ onClick, selected }: ProfileIconProps) {
 
         <circle cx="12" cy="12" r={selected ? "5" : "3"} fill="currentColor" />
       </svg>
+      <span className={styles.tooltip}>Status</span>
     </div>
   );
 }
