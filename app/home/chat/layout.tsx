@@ -1,4 +1,9 @@
+import { WhatsAppTextLogo } from "@/components/WhatsApp/WhatsAppText";
 import styles from "./layout.module.css";
+import { NewChatIconButton } from "@/components/IconButtons/NewChatIconButton";
+import { MoreOptionsIconButton } from "@/components/IconButtons/MoreOptionsIconButton";
+import { SearchBar } from "@/components/SearchBar/SearchBar";
+import { Filters } from "@/components/Filters/Filters";
 
 export default function ChatLayout({
   children,
@@ -8,11 +13,16 @@ export default function ChatLayout({
   return (
     <div className={styles.layoutWrapper}>
       <aside className={styles.sidebar}>
-        <h2>Chats</h2>
-
-        <div>Chat 1</div>
-        <div>Chat 2</div>
-        <div>Chat 3</div>
+        <header className={styles.header}>
+          <WhatsAppTextLogo />
+          <div className={styles.iconsHeader}>
+            <NewChatIconButton />
+            <MoreOptionsIconButton />
+          </div>
+        </header>
+        <SearchBar />
+        <Filters />
+        <p>Lista</p>
       </aside>
 
       <main className={styles.content}>{children}</main>

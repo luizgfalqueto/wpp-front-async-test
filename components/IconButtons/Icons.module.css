@@ -33,6 +33,26 @@
   background-color: rgb(58, 58, 58);
 }
 
+.tooltipBottom {
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  top: 50%;
+  left: 120%;
+  transform: translateY(120%) translateX(-75%);
+
+  background: #ffffff;
+  color: black;
+  padding: 6px 10px;
+  border-radius: 4px;
+
+  white-space: nowrap;
+  font-size: 13px;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
 .tooltip {
   visibility: hidden;
   opacity: 0;
@@ -54,7 +74,8 @@
 }
 
 .containerSelected:hover .tooltip,
-.container:hover .tooltip {
+.container:hover .tooltip,
+.container:hover .tooltipBottom {
   visibility: visible;
   opacity: 1;
 }
