@@ -62,7 +62,7 @@ export default function Loading() {
           return prev + 10;
         });
       }, 100);
-    }, 2000);
+    }, 500);
 
     return () => {
       clearTimeout(timeout);

@@ -1,45 +1,34 @@
 "use client";
-import { useState } from "react";
 import { SideBar } from "../../components/Sidebar/SideBar";
 import { useUserStore } from "../../stores/useStore";
-import styles from "./Home.module.css";
-import ChatPage from "../chat/page";
-import CallsPage from "../calls/page";
-import StatusPage from "../status/page";
-import ChannelsPage from "../channels/page";
-import CommunitiesPage from "../communities/page";
-import MidiaPage from "../midia/page";
-import ProfilePage from "../profile/page";
+import styles from "./layout.module.css";
+import { useRouter, usePathname } from "next/navigation";
 
-export default function HomeLayout() {
-  const [activePage, setActivePage] = useState("chat");
+export default function HomeLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const router = useRouter();
+  const pathName = usePathname();
+
   const user = useUserStore((state) => state.user);
 
-  const renderContent = () => {
-    switch (activePage) {
-      case "chat":
-        return <ChatPage />;
-      case "calls":
-        return <CallsPage />;
-      case "status":
-        return <StatusPage />;
-      case "channels":
-        return <ChannelsPage />;
-      case "communities":
-        return <CommunitiesPage />;
-      case "midia":
-        return <MidiaPage />;
-      case "profile":
-        return <ProfilePage />;
-      default:
-        return <ChatPage />;
-    }
+  const activePage = pathName.split("/")[2] || "chat";
+
+  const handleSelect = (page: string) => {
+    router.push(`/home/${page}`);
   };
 
   return (
-    <div className={styles.container}>
-      <SideBar onSelect={setActivePage} activePage={activePage} avatarUrl={user?.avatarUrl} />
-      <main className={styles.main}>{renderContent()}</main>
+    <div className={styles.layoutWrapper}>
+      <SideBar
+        onSelect={handleSelect}
+        activePage={activePage}
+        avatarUrl={user?.avatarUrl}
+      />
+
+      <main className={styles.content}>{children}</main>
     </div>
   );
 }
