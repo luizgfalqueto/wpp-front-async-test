@@ -22,7 +22,6 @@ export default function ChatLayout({
         </header>
         <SearchBar />
         <Filters />
-        <p>Lista</p>
       </aside>
 
       <main className={styles.content}>{children}</main>
