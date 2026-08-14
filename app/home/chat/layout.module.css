@@ -16,6 +16,9 @@
   background-color: var(--whatsapp-dark-secundary-background);
   overflow-x: hidden;
 
+  display: flex;
+  flex-direction: column;
+
   position: relative;
 
   box-sizing: initial;
@@ -41,4 +44,25 @@
   min-width: 0;
   height: 100%;
   overflow-y: auto;
+}
+
+.chatListContainer {
+  padding-top: 8px;
+  flex: 1;
+  overflow-y: auto;
+
+  scrollbar-color: var(--whatsapp-dark-terciary-background) transparent;
+}
+
+.chatListContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatListContainer::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.chatListContainer::-webkit-scrollbar-track {
+  background: transparent;
 }

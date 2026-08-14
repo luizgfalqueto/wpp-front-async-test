@@ -2,10 +2,22 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Filter.module.css";
+import { FilterType } from "@/types/filter";
 
-const filters = ["Todos", "Não lidos", "Favoritos", "Grupos"];
+const filters: FilterType[] = ["All", "Unread", "Group"];
 
-export function Filters() {
+const filterLabels: Record<FilterType, string> = {
+  All: "Todos",
+  Unread: "Não lidos",
+  Group: "Grupos",
+};
+
+type ButtonProps = {
+  onClick: (filter: FilterType) => void;
+  filterSelected: FilterType;
+};
+
+export function Filters({ onClick, filterSelected }: ButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -63,13 +75,14 @@ export function Filters() {
       {visibleFilters.map((filter) => (
         <button
           key={filter}
+          onClick={() => onClick(filter)}
           className={
-            filter === "Todos"
+            filter === filterSelected
               ? styles.filterButtonSelected
               : styles.filterButton
           }
         >
-          {filter}
+          {filterLabels[filter]}
         </button>
       ))}
 
@@ -94,7 +107,7 @@ export function Filters() {
               >
                 {menuFilters.map((filter) => (
                   <button key={filter} className={styles.menuItem}>
-                    {filter}
+                    {filterLabels[filter]}
                   </button>
                 ))}
               </div>,

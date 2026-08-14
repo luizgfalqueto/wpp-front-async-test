@@ -8,11 +8,11 @@
   --whatsapp-dark-terciary-background: rgb(58, 58, 58);
   --whatsapp-dark-bubble-sent: #005c4b;
   --whatsapp-dark-bubble-received: #202c33;
-  --whatsapp-dark-text-primary: #e9edef;
+  --whatsapp-dark-text-primary: #fafafa;
   --whatsapp-dark-text-secondary: rgb(160, 160, 160);
 
   /* WhatsApp Web Fonts */
-  --font-family: var(--font-roboto), Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family: "Roboto Variable", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
