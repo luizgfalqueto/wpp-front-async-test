@@ -4,7 +4,11 @@ import { Chat} from "@/types/chat";
 import { Contact } from "@/types/contact";
 import { FilterType } from "@/types/filter";
 
-export const getChatsByFilter = (filter: FilterType): Chat[] => {
+export const getChatsByFilter = (
+  searchText: string,
+  filter: FilterType
+): Chat[] => {
+  console.log(`Pesquisando por ${searchText}`);
   const chats = (data["chats"] as Chat[]).map(mapToChat);
 
   let filteredChats: Chat[];
@@ -20,10 +24,33 @@ export const getChatsByFilter = (filter: FilterType): Chat[] => {
       );
       break;
 
-    default:
+    case "Unread":
       filteredChats = chats.filter(
         (chat) => chat.unreadCount > 0
       );
+      break;
+  }
+
+  const normalizedSearchText = searchText.trim().toLowerCase();
+
+  if (normalizedSearchText) {
+    filteredChats = filteredChats.filter((chat) => {
+      const chatName = chat.name.toLowerCase();
+
+      const lastMessage = chat.messages.find(
+        (message) => message.id === chat.lastMessageId
+      );
+
+      const messageText =
+        lastMessage?.type === "text"
+          ? lastMessage.text.toLowerCase()
+          : "";
+
+      return (
+        chatName.includes(normalizedSearchText) ||
+        messageText.includes(normalizedSearchText)
+      );
+    });
   }
 
   return filteredChats.sort((a, b) => {

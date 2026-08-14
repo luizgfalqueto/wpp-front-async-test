@@ -104,3 +104,7 @@
   align-items: center;
   gap: 4px;
 }
+
+.highlight {
+  color: var(--whatsapp-dark-primary);
+}

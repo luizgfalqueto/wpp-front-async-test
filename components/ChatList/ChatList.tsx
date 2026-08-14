@@ -9,11 +9,19 @@ import { PinnedChat } from "../PinnedChat/PinnedChat";
 import { UnreadChat } from "../UnreadChat/UnreadChat";
 import { getContactById } from "@/utils/helpers/chatHelper";
 
-export function ChatList({ chats }: { chats: Chat[] }) {
-  return chats.map((chat) => <ChatItem key={chat.id} chat={chat} />);
+export function ChatList({
+  chats,
+  searchText,
+}: {
+  chats: Chat[];
+  searchText: string;
+}) {
+  return chats.map((chat) => (
+    <ChatItem key={chat.id} chat={chat} searchText={searchText} />
+  ));
 }
 
-function ChatItem({ chat }: { chat: Chat }) {
+function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
   const lastMessage: Message | undefined = chat.messages.find((message) => {
     return message.id == chat.lastMessageId;
   });
@@ -29,6 +37,33 @@ function ChatItem({ chat }: { chat: Chat }) {
   const lastSender =
     chat.type === "group" ? getContactById(lastMessage?.senderId) : null;
 
+  function escapeRegex(text: string) {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function highlightText(text: string, searchText: string) {
+    console.log(`Texto: ${text}`);
+    console.log(`Search: ${searchText}`);
+    if (!searchText) {
+      return text;
+    }
+
+    const escapedSearch = escapeRegex(searchText);
+    const regex = new RegExp(`(${escapedSearch})`, "gi");
+
+    return text.split(regex).map((part, index) => {
+      if (part.toLowerCase() === searchText.toLowerCase()) {
+        return (
+          <span key={index} className={styles.highlight}>
+            {part}
+          </span>
+        );
+      }
+
+      return part;
+    });
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.imageContent}>
@@ -42,7 +77,7 @@ function ChatItem({ chat }: { chat: Chat }) {
       </div>
       <div className={styles.rightContent}>
         <div className={styles.topContent}>
-          <p>{chat.name}</p>
+          <p>{highlightText(chat.name, searchText)}</p>
           <p className={styles.timestamp}>
             {formatMessageDate(lastMessage?.timestamp || "")}
           </p>

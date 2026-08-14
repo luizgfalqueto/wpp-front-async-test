@@ -15,13 +15,14 @@ export default function ChatLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [searchContent, setSearchContent] = useState<string>("");
   const [filterApplyed, setFilterApplyed] = useState<FilterType>("All");
 
   function selectFilter(filter: FilterType) {
     setFilterApplyed(filter);
   }
 
-  const chats = getChatsByFilter(filterApplyed);
+  const chats = getChatsByFilter(searchContent, filterApplyed);
 
   return (
     <div className={styles.layoutWrapper}>
@@ -33,10 +34,10 @@ export default function ChatLayout({
             <MoreOptionsIconButton />
           </div>
         </header>
-        <SearchBar />
+        <SearchBar onSearch={setSearchContent} />
         <Filters onClick={selectFilter} filterSelected={filterApplyed} />
         <div className={styles.chatListContainer}>
-          <ChatList chats={chats} />
+          <ChatList chats={chats} searchText={searchContent} />
         </div>
       </aside>
 

@@ -1,13 +1,19 @@
 import styles from "./SearchBar.module.css";
 
-export function SearchBar() {
+type SearchBarProps = {
+  onSearch: (text: string) => void;
+};
+
+export function SearchBar({ onSearch }: SearchBarProps) {
   return (
     <div className={styles.container}>
       <input
         type="text"
         placeholder="Pesquisar ou começar uma nova conversa"
         className={styles.input}
+        onChange={(event) => onSearch(event.target.value)}
       />
+
       <span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
