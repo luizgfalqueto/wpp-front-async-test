@@ -1,5 +1,6 @@
 import styles from "./ChatList.module.css";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { formatMessageDate } from "@/utils/helpers/dateHelper";
 import { Chat } from "@/types/chat";
 import { Message } from "@/types/message";
@@ -8,6 +9,7 @@ import { MutedChat } from "../MutedChat/MutedChat";
 import { PinnedChat } from "../PinnedChat/PinnedChat";
 import { UnreadChat } from "../UnreadChat/UnreadChat";
 import { getContactById } from "@/utils/helpers/chatHelper";
+import Link from "next/link";
 
 export function ChatList({
   chats,
@@ -22,6 +24,10 @@ export function ChatList({
 }
 
 function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
+  const pathname = usePathname();
+
+  const isSelected = pathname === `/home/chat/${chat.id}`;
+
   const lastMessage: Message | undefined = chat.messages.find((message) => {
     return message.id == chat.lastMessageId;
   });
@@ -65,38 +71,40 @@ function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.imageContent}>
-        <Image
-          src={chat.avatarUrl || "/images/person.jpg"}
-          alt="Image do avatar da conversa"
-          width={48}
-          height={48}
-          className={styles.image}
-        />
-      </div>
-      <div className={styles.rightContent}>
-        <div className={styles.topContent}>
-          <p>{highlightText(chat.name, searchText)}</p>
-          <p className={styles.timestamp}>
-            {formatMessageDate(lastMessage?.timestamp || "")}
-          </p>
+    <Link className={styles.link} href={`/home/chat/${chat.id}`}>
+      <div className={isSelected ? styles.containerSelected : styles.container}>
+        <div className={styles.imageContent}>
+          <Image
+            src={chat.avatarUrl || "/images/person.jpg"}
+            alt="Image do avatar da conversa"
+            width={48}
+            height={48}
+            className={styles.image}
+          />
         </div>
-        <div className={styles.lastMessage}>
-          <div className={styles.prefix}>
-            {lastMessage?.senderId === "me" && (
-              <CheckReadMessageIcon status={lastMessage?.status} />
-            )}
-            {lastSender != null && `${lastSender.name}:`}
-            <p className={styles.lastMessageText}>{lastMessageText}</p>
+        <div className={styles.rightContent}>
+          <div className={styles.topContent}>
+            <p>{highlightText(chat.name, searchText)}</p>
+            <p className={styles.timestamp}>
+              {formatMessageDate(lastMessage?.timestamp || "")}
+            </p>
           </div>
-          <div className={styles.suffix}>
-            {chat.pinned && <PinnedChat />}
-            {chat.unreadCount > 0 && <UnreadChat count={chat.unreadCount} />}
-            {chat.muted && <MutedChat />}
+          <div className={styles.lastMessage}>
+            <div className={styles.prefix}>
+              {lastMessage?.senderId === "me" && (
+                <CheckReadMessageIcon status={lastMessage?.status} />
+              )}
+              {lastSender != null && `${lastSender.name}:`}
+              <p className={styles.lastMessageText}>{lastMessageText}</p>
+            </div>
+            <div className={styles.suffix}>
+              {chat.pinned && <PinnedChat />}
+              {chat.unreadCount > 0 && <UnreadChat count={chat.unreadCount} />}
+              {chat.muted && <MutedChat />}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

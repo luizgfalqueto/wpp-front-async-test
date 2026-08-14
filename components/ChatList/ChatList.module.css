@@ -7,6 +7,21 @@
   align-items: center;
 }
 
+.link {
+  text-decoration: none;
+}
+
+.containerSelected {
+  box-sizing: border-box;
+  margin: 0 10px;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: var(--whatsapp-dark-terciary-background);
+}
+
 .container:hover {
   background-color: var(--whatsapp-dark-terciary-background);
 }

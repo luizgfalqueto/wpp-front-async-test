@@ -78,3 +78,15 @@ export const getContactById = (contactId : string | undefined | null): Contact |
 
   return found;
 };
+
+export const getChatById = (chatId: string | undefined | null): Chat | null => {
+  if(chatId == undefined || chatId == null) return null;
+  
+  const found = data.chats.find((chat) => chat.id === chatId);
+
+  if (!found) {
+    return null;
+  }
+
+  return mapToChat(found);
+};
