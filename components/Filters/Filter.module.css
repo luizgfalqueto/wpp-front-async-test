@@ -1,0 +1,68 @@
+.container {
+  padding: 6px 10px 8px 20px;
+  display: flex;
+  /* overflow-x: hidden; */
+  white-space: nowrap;
+  gap: 8px;
+}
+
+.filterButton {
+  height: 30px;
+  padding: 2px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--whatsapp-dark-secundary-background);
+  color: var(--whatsapp-dark-text-secondary);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: var(--font-family);
+}
+
+.filterButtonSelected {
+  height: 30px;
+  padding: 2px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--whatsapp-dark-secundary);
+  color: var(--whatsapp-dark-terciary);
+  border-radius: 50px;
+  font-weight: bold;
+  font-family: var(--font-family);
+}
+
+.filterButton:hover {
+  background-color: var(--whatsapp-dark-terciary-background);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--whatsapp-dark-secundary-background);
+  border-radius: 8px;
+  padding: 5px;
+  margin-top: 5px;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.menuItem {
+  display: block;
+  width: 100%;
+  padding: 8px 12px 8px 30px;
+  background: transparent;
+  color: var(--whatsapp-dark-text-primary);
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-family);
+  white-space: nowrap;
+}
+
+.menuItem:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

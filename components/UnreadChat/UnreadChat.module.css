@@ -1,0 +1,15 @@
+.container {
+  width: 20px;
+  height: 20px;
+  background-color: var(--whatsapp-dark-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  /* padding: 8px; */
+}
+
+.text {
+  color: var(--whatsapp-dark-secundary);
+  font-size: 14;
+}

@@ -1,0 +1,42 @@
+.container {
+  padding: 0 20px;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  margin-bottom: 4px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 12px 8px 45px;
+  border-radius: 50px;
+  border: 1px solid transparent;
+  background-color: var(--whatsapp-dark-terciary-background);
+  color: white;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: var(--whatsapp-dark-primary);
+  border-width: 2px;
+}
+
+.input::placeholder {
+  color: var(--whatsapp-dark-text-secondary);
+}
+
+.suffixIcon {
+  position: absolute;
+  left: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: 0;
+  background: transparent;
+  color: var(--whatsapp-dark-text-secondary);
+  cursor: pointer;
+}

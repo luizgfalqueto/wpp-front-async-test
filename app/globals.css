@@ -1,22 +1,18 @@
 :root {
-  /* WhatsApp Web Colors (Light) */
-  --whatsapp-primary: #25d366;
-  --whatsapp-background: #efeae2;
-  --whatsapp-bubble-sent: #d9fdd3;
-  --whatsapp-bubble-received: #ffffff;
-  --whatsapp-text-primary: #111b21;
-  --whatsapp-text-secondary: #667781;
-
   /* WhatsApp Web Colors (Dark) */
   --whatsapp-dark-primary: #25d366;
-  --whatsapp-dark-background: #1d1f1f;
+  --whatsapp-dark-secundary: rgb(16, 53, 41);
+  --whatsapp-dark-terciary: rgb(217, 253, 211);
+  --whatsapp-dark-background: rgb(29, 31, 31);
+  --whatsapp-dark-secundary-background: rgb(22, 23, 23);
+  --whatsapp-dark-terciary-background: rgb(58, 58, 58);
   --whatsapp-dark-bubble-sent: #005c4b;
   --whatsapp-dark-bubble-received: #202c33;
-  --whatsapp-dark-text-primary: #e9edef;
-  --whatsapp-dark-text-secondary: #888888;
+  --whatsapp-dark-text-primary: #fafafa;
+  --whatsapp-dark-text-secondary: rgb(160, 160, 160);
 
   /* WhatsApp Web Fonts */
-  --font-family: "Helvetica Neue", Arial, sans-serif;
+  --font-family: "Roboto Variable", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import Image from "next/image";
 import styles from "./Loading.module.css";
-import { ProgressBar } from "../components/ProgressBar";
+import { ProgressBar } from "..//components/ProgressBar/ProgressBar";
 
 export default function Loading() {
   const [progress, setProgress] = useState<number>(0);
@@ -25,7 +25,7 @@ export default function Loading() {
           return prev + 10;
         });
       }, 100);
-    }, 2000);
+    }, 500);
 
     return () => {
       clearTimeout(timeout);

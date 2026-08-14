@@ -1,0 +1,68 @@
+.layoutWrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgb(192, 124, 124);
+}
+
+.sidebar {
+  height: 100%;
+  width: 32%;
+  max-width: 430px;
+  min-width: 350px;
+
+  border-right: 1px solid #ddd;
+  background-color: var(--whatsapp-dark-secundary-background);
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  box-sizing: initial;
+}
+
+.header {
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconsHeader {
+  gap: 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chatListContainer {
+  padding-top: 8px;
+  flex: 1;
+  overflow-y: auto;
+
+  scrollbar-color: var(--whatsapp-dark-terciary-background) transparent;
+}
+
+.chatListContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatListContainer::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.chatListContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
