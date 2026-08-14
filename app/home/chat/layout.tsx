@@ -19,6 +19,9 @@ export default function ChatLayout({
   const [filterApplyed, setFilterApplyed] = useState<FilterType>("All");
 
   function selectFilter(filter: FilterType) {
+    if (filter === "All") {
+      setSearchContent("");
+    }
     setFilterApplyed(filter);
   }
 
@@ -34,10 +37,18 @@ export default function ChatLayout({
             <MoreOptionsIconButton />
           </div>
         </header>
-        <SearchBar onSearch={setSearchContent} />
+        <SearchBar
+          onSearch={setSearchContent}
+          value={searchContent}
+          onClear={() => setSearchContent("")}
+        />
         <Filters onClick={selectFilter} filterSelected={filterApplyed} />
         <div className={styles.chatListContainer}>
-          <ChatList chats={chats} searchText={searchContent} />
+          <ChatList
+            chats={chats}
+            searchText={searchContent}
+            onClearFilters={filterApplyed !== "All" ? selectFilter : null}
+          />
         </div>
       </aside>
 

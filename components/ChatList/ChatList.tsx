@@ -10,14 +10,27 @@ import { PinnedChat } from "../PinnedChat/PinnedChat";
 import { UnreadChat } from "../UnreadChat/UnreadChat";
 import { getContactById } from "@/utils/helpers/chatHelper";
 import Link from "next/link";
+import { NotFound } from "../NotFound/NotFound";
+import { FilterType } from "@/types/filter";
 
 export function ChatList({
   chats,
   searchText,
+  onClearFilters,
 }: {
   chats: Chat[];
   searchText: string;
+  onClearFilters: ((filter: FilterType) => void) | null;
 }) {
+  if (chats.length == 0) {
+    return (
+      <NotFound
+        text={"Nenhuma conversa, contato ou mensagem encontrada"}
+        textButton={"Pesquisar em todas as conversas"}
+        onPress={onClearFilters !== null ? () => onClearFilters("All") : null}
+      />
+    );
+  }
   return chats.map((chat) => (
     <ChatItem key={chat.id} chat={chat} searchText={searchText} />
   ));
@@ -48,8 +61,6 @@ function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
   }
 
   function highlightText(text: string, searchText: string) {
-    console.log(`Texto: ${text}`);
-    console.log(`Search: ${searchText}`);
     if (!searchText) {
       return text;
     }

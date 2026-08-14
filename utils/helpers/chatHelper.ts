@@ -8,7 +8,6 @@ export const getChatsByFilter = (
   searchText: string,
   filter: FilterType
 ): Chat[] => {
-  console.log(`Pesquisando por ${searchText}`);
   const chats = (data["chats"] as Chat[]).map(mapToChat);
 
   let filteredChats: Chat[];

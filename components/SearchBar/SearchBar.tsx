@@ -2,19 +2,22 @@ import styles from "./SearchBar.module.css";
 
 type SearchBarProps = {
   onSearch: (text: string) => void;
+  value: string;
+  onClear: () => void;
 };
 
-export function SearchBar({ onSearch }: SearchBarProps) {
+export function SearchBar({ onSearch, value, onClear }: SearchBarProps) {
   return (
     <div className={styles.container}>
       <input
         type="text"
         placeholder="Pesquisar ou começar uma nova conversa"
         className={styles.input}
+        value={value}
         onChange={(event) => onSearch(event.target.value)}
       />
 
-      <span>
+      <span style={{ cursor: "pointer" }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -29,6 +32,22 @@ export function SearchBar({ onSearch }: SearchBarProps) {
           />
         </svg>
       </span>
+      {value !== "" && (
+        <span onClick={onClear} className={styles.clearButton}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width={24}
+            height={24}
+            fill="none"
+          >
+            <path
+              fill="currentColor"
+              d="m12 13.4-4.9 4.9a.95.95 0 0 1-.7.27.95.95 0 0 1-.7-.27.95.95 0 0 1-.28-.7c0-.28.1-.52.28-.7l4.9-4.9-4.9-4.9a.95.95 0 0 1-.28-.7.95.95 0 0 1 .97-.98c.3 0 .53.1.71.28l4.9 4.9 4.9-4.9a.95.95 0 0 1 .7-.27c.28 0 .52.09.7.27.18.18.27.42.27.7 0 .28-.09.52-.27.7L13.4 12l4.9 4.9c.18.18.27.42.27.7 0 .28-.09.52-.27.7a.95.95 0 0 1-.7.27.95.95 0 0 1-.7-.27L12 13.4Z"
+            />
+          </svg>
+        </span>
+      )}
     </div>
   );
 }
