@@ -9,6 +9,7 @@ import { Filters } from "@/components/Filters/Filters";
 import { FilterType } from "@/types/filter";
 import { ChatList } from "@/components/ChatList/ChatList";
 import { getChatsByFilter } from "@/utils/helpers/chatHelper";
+import { ChatHeader } from "@/components/ChatHeader/ChatHeader";
 
 export default function ChatLayout({
   children,
@@ -52,7 +53,10 @@ export default function ChatLayout({
         </div>
       </aside>
 
-      <main className={styles.content}>{children}</main>
+      <div className={styles.main}>
+        <ChatHeader />
+        {children}
+      </div>
     </div>
   );
 }

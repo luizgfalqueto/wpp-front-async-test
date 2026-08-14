@@ -13,7 +13,7 @@ export default async function ChatPage({ params }: PageProps) {
   const chat = getChatById(chatId);
 
   if (!chat) {
-    return <div>Chat não encontrado.</div>;
+    return <div className={styles.container}>Chat encontrado.</div>;
   }
 
   return (

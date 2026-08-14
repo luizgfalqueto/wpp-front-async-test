@@ -3,12 +3,23 @@ import styles from "./Icons.module.css";
 interface ProfileIconProps {
   onClick?: () => void;
   selected: boolean;
+  withBackground?: boolean;
 }
 
-export function PhoneIconButton({ onClick, selected }: ProfileIconProps) {
+export function PhoneIconButton({
+  onClick,
+  selected,
+  withBackground = true,
+}: ProfileIconProps) {
   return (
     <div
-      className={selected ? styles.containerSelected : styles.container}
+      className={
+        selected
+          ? withBackground
+            ? styles.containerSelected
+            : styles.container
+          : styles.container
+      }
       onClick={onClick}
     >
       <svg
