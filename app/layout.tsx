@@ -7,6 +7,7 @@ const roboto = Roboto({
 });
 import "./globals.css";
 import "./reset.css";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "WhatsApp",
