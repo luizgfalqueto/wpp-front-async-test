@@ -6,6 +6,7 @@ import styles from "../page.module.css";
 import { AttachIconButton } from "@/components/IconButtons/AttachIconButton";
 import { StickerIconButton } from "@/components/IconButtons/StickerIconButton";
 import { RecordIconButton } from "@/components/IconButtons/RecordIconButton";
+import MessageList from "@/components/MessageList/MessageList";
 
 export default function ChatPage() {
   const pathName = usePathname();
@@ -16,7 +17,9 @@ export default function ChatPage() {
 
   return (
     <div className={styles.chatContainer}>
-      <div className={styles.messageContainer}></div>
+      <div className={styles.messageContainer}>
+        <MessageList chat={chat} />
+      </div>
       <div className={styles.bottomBar}>
         <AttachIconButton />
         <StickerIconButton />
