@@ -7,6 +7,7 @@ import { generateSenderColor } from "@/utils/helpers/colorHelper";
 import styles from "../../app/home/chat/page.module.css";
 import messageStyles from "../../app/home/chat/[chatId]/Message.module.css";
 import { MessageTail } from "../MessageTail/MessageTail";
+import { MessageStatusIcon } from "../MessageStatusIcon/MessageStatusIcon";
 
 type MessageListProps = {
   chat: Chat | null;
@@ -88,7 +89,10 @@ function renderMessages(messages: Message[], isGroup: boolean) {
             </span>
             {content}
           </div>
-          <div className={messageStyles.timestamp}>{time}</div>
+          <div className={messageStyles.timestamp}>
+            {time}
+            {isLoggedSender && <MessageStatusIcon status={message.status} />}
+          </div>
         </div>
       </div>
     );
