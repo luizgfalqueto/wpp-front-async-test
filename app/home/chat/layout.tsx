@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { WhatsAppTextLogo } from "@/components/WhatsApp/WhatsAppText";
 import styles from "./layout.module.css";
 import { NewChatIconButton } from "@/components/IconButtons/NewChatIconButton";
@@ -11,13 +10,11 @@ import { FilterType } from "@/types/filter";
 import { ChatList } from "@/components/ChatList/ChatList";
 import { getChatsByFilter } from "@/utils/helpers/chatHelper";
 import { ChatHeader } from "@/components/ChatHeader/ChatHeader";
+import { Chat } from "@/types/chat";
+import { useChatStore } from "@/stores/useChatStore";
 
-function checkIfChatSelected(pathName: string) {
-  const splitted = pathName.split("/");
-  if (splitted.length == 4) {
-    return splitted[3];
-  }
-  return null;
+declare global {
+  var chatSelected: Chat | null;
 }
 
 export default function ChatLayout({
@@ -25,9 +22,6 @@ export default function ChatLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathName = usePathname();
-  const chatSelectedId = checkIfChatSelected(pathName);
-
   const [searchContent, setSearchContent] = useState<string>("");
   const [filterApplyed, setFilterApplyed] = useState<FilterType>("All");
 
@@ -38,7 +32,9 @@ export default function ChatLayout({
     setFilterApplyed(filter);
   }
 
-  const chats = getChatsByFilter(searchContent, filterApplyed);
+  const getChatSelected = useChatStore((state) => state.selectedChat);
+
+  const chatsFiltered = getChatsByFilter(searchContent, filterApplyed);
 
   return (
     <div className={styles.layoutWrapper}>
@@ -58,7 +54,7 @@ export default function ChatLayout({
         <Filters onClick={selectFilter} filterSelected={filterApplyed} />
         <div className={styles.chatListContainer}>
           <ChatList
-            chats={chats}
+            chats={chatsFiltered}
             searchText={searchContent}
             onClearFilters={filterApplyed !== "All" ? selectFilter : null}
           />
@@ -66,11 +62,7 @@ export default function ChatLayout({
       </aside>
 
       <div className={styles.main}>
-        {chatSelectedId !== null && (
-          <ChatHeader
-            chat={chats.find((chat) => chat.id === chatSelectedId)!}
-          />
-        )}
+        {getChatSelected !== null && <ChatHeader chat={getChatSelected} />}
         {children}
       </div>
     </div>

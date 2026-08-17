@@ -8,7 +8,7 @@ import { SearchIconButton } from "../IconButtons/SearchIconButton";
 import { MoreOptionsIconButton } from "../IconButtons/MoreOptionsIconButton";
 
 export function ChatHeader({ chat }: { chat: Chat }) {
-  const isGroup = chat.type == "group";
+  const isGroup = chat.type === "group";
   const participants = isGroup
     ? getChatParticipantsByIds(chat.participants.map((part) => part.contactId))
     : null;
@@ -16,7 +16,7 @@ export function ChatHeader({ chat }: { chat: Chat }) {
     <div className={styles.header}>
       <div className={styles.detailsContent}>
         <Image
-          src={"/images/person.jpg"}
+          src={chat.avatarUrl!}
           alt="Profile"
           width={40}
           height={40}

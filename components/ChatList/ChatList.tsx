@@ -1,6 +1,8 @@
+"use client";
+
 import styles from "./ChatList.module.css";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { useChatStore } from "@/stores/useChatStore";
 import { formatMessageDate } from "@/utils/helpers/dateHelper";
 import { Chat } from "@/types/chat";
 import { Message } from "@/types/message";
@@ -37,13 +39,14 @@ export function ChatList({
 }
 
 function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
-  const pathname = usePathname();
-
-  const isSelected = pathname === `/home/chat/${chat.id}`;
+  const isSelected =
+    chat.id === useChatStore((state) => state.selectedChat)?.id;
 
   const lastMessage: Message | undefined = chat.messages.find((message) => {
     return message.id == chat.lastMessageId;
   });
+
+  const setSelectedChat = useChatStore((state) => state.setSelectedChat);
 
   const getMessageText = (message: Message): string => {
     if (message.type === "text") return message.text;
@@ -82,7 +85,11 @@ function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
   }
 
   return (
-    <Link className={styles.link} href={`/home/chat/${chat.id}`}>
+    <Link
+      onClick={() => setSelectedChat(chat)}
+      className={styles.link}
+      href={`/home/chat/${chat.id}`}
+    >
       <div className={isSelected ? styles.containerSelected : styles.container}>
         <div className={styles.imageContent}>
           <Image

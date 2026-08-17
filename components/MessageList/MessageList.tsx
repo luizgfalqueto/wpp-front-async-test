@@ -49,7 +49,7 @@ function renderMessages(messages: Message[], isGroup: boolean) {
       return <span key={message.id}></span>;
     }
     if (message.type === "system") {
-      return systemMessage(message.system.text);
+      return systemMessage(message.id, message.system.text);
     } else {
       content = getMessageContentByType(message);
     }
@@ -172,9 +172,9 @@ function getMessageContentByType(message: Message) {
   }
 }
 
-function systemMessage(message: string) {
+function systemMessage(id: string, message: string) {
   return (
-    <div className={messageStyles.systemMessage}>
+    <div key={message} className={messageStyles.systemMessage}>
       <p className={messageStyles.systemMessageText}>{message}</p>
     </div>
   );
