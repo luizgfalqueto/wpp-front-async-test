@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { WhatsAppTextLogo } from "@/components/WhatsApp/WhatsAppText";
 import styles from "./layout.module.css";
 import { NewChatIconButton } from "@/components/IconButtons/NewChatIconButton";
@@ -11,11 +12,22 @@ import { ChatList } from "@/components/ChatList/ChatList";
 import { getChatsByFilter } from "@/utils/helpers/chatHelper";
 import { ChatHeader } from "@/components/ChatHeader/ChatHeader";
 
+function checkIfChatSelected(pathName: string) {
+  const splitted = pathName.split("/");
+  if (splitted.length == 4) {
+    return splitted[3];
+  }
+  return null;
+}
+
 export default function ChatLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathName = usePathname();
+  const chatSelectedId = checkIfChatSelected(pathName);
+
   const [searchContent, setSearchContent] = useState<string>("");
   const [filterApplyed, setFilterApplyed] = useState<FilterType>("All");
 
@@ -54,7 +66,11 @@ export default function ChatLayout({
       </aside>
 
       <div className={styles.main}>
-        <ChatHeader />
+        {chatSelectedId !== null && (
+          <ChatHeader
+            chat={chats.find((chat) => chat.id === chatSelectedId)!}
+          />
+        )}
         {children}
       </div>
     </div>

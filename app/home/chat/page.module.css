@@ -1,1 +1,67 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--whatsapp-dark-background);
 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.chatContainer {
+  width: calc(100% - 20px);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 10px;
+}
+
+.messageContainer {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.bottomBar {
+  padding: 10px;
+  width: 100%;
+  height: 64px;
+  margin-bottom: 10px;
+  background-color: var(--whatsapp-dark-input-chat-background);
+  border-radius: 100px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input {
+  margin: 0 10px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  background-color: transparent;
+
+  font-family: var(--font-family);
+  color: white;
+
+  width: 100%;
+  line-height: 16px;
+}
+
+.input:hover,
+.input:focus,
+.input:active,
+.input:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.input::placeholder {
+  font-size: 14px;
+}
