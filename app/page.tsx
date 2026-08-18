@@ -4,6 +4,7 @@ import data from "@/database/db.json";
 import { mapToChat } from "@/utils/mappers/chatMapper";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSettingsStore } from "@/stores/useSettingsStore";
 
 import { useChatStore } from "@/stores/useChatStore";
 
@@ -14,11 +15,23 @@ import { ProgressBar } from "../components/ProgressBar/ProgressBar";
 import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 export default function Loading() {
+  const setLocale = useSettingsStore((state) => state.setLocale);
+
   const [progress, setProgress] = useState(0);
 
   const router = useRouter();
 
   const setChats = useChatStore((state) => state.setChats);
+
+  useEffect(() => {
+    const browserLocale = navigator.language.toLowerCase();
+
+    if (browserLocale.startsWith("en")) {
+      setLocale("en-US");
+    } else {
+      setLocale("pt-BR");
+    }
+  }, [setLocale]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;

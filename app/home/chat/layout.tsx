@@ -112,6 +112,7 @@ export default function ChatLayout({
           <ChatList
             chats={chatsFiltered}
             searchText={searchContent}
+            filter={filterApplyed}
             onClearFilters={filterApplyed !== "All" ? selectFilter : null}
           />
         </div>

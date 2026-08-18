@@ -35,7 +35,9 @@ export function ChatIconButton({ onClick, selected }: ProfileIconProps) {
             d="M7 14a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1Z"
           />
         </svg>
-        <span className={styles.tooltip}>Conversas</span>
+        <span className={styles.tooltip}>
+          {tSystemMessage("tooltip_conversation", "Conversas")}
+        </span>
       </div>
     );
   }

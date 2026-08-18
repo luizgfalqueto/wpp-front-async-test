@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type Locale = "pt-BR" | "en-US";
+export type Locale = "pt-BR" | "en-US";
 
 type SettingsState = {
   locale: Locale;
@@ -8,7 +8,7 @@ type SettingsState = {
 };
 
 export const useSettingsStore = create<SettingsState>((set) => ({
-  locale: "en-US",
+  locale: "pt-BR",
 
   setLocale: (locale) => set({ locale }),
 }));

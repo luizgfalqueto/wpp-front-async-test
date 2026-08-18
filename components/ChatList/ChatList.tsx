@@ -18,10 +18,12 @@ import { FilterType } from "@/types/filter";
 export function ChatList({
   chats,
   searchText,
+  filter,
   onClearFilters,
 }: {
   chats: Chat[];
   searchText: string;
+  filter: FilterType;
   onClearFilters: ((filter: FilterType) => void) | null;
 }) {
   if (chats.length === 0) {
@@ -29,6 +31,7 @@ export function ChatList({
       <NotFound
         text="Nenhuma conversa, contato ou mensagem encontrada"
         textButton="Pesquisar em todas as conversas"
+        showImage={filter === "Unread"}
         onPress={onClearFilters !== null ? () => onClearFilters("All") : null}
       />
     );
