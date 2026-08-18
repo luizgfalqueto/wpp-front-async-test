@@ -1,5 +1,106 @@
 .container {
   width: 100%;
   height: 100%;
-  padding: 24px;
+  background-color: var(--whatsapp-dark-background);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatContainer {
+  width: calc(100% - 20px);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 10px;
+}
+
+.messageContainer {
+  width: 100%;
+
+  padding-bottom: 10px;
+
+  /* ocupa somente o espaço disponível */
+  flex: 1;
+
+  background-color: transparent;
+
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+
+  /* importante para o scroll funcionar dentro de flex */
+  min-height: 0;
+}
+
+.messageContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.messageContainer {
+  scrollbar-width: none;
+}
+
+.messageContainer {
+  -ms-overflow-style: none;
+}
+
+.messageInnerContainer {
+  width: 100%;
+  height: 30px;
+
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.bottomBar {
+  flex-shrink: 0;
+
+  padding: 10px;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+
+  margin-bottom: 10px;
+
+  background-color: var(--whatsapp-dark-input-chat-background);
+  border-radius: 100px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input {
+  margin: 0 10px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  background-color: transparent;
+
+  font-family: var(--font-family);
+  color: white;
+
+  width: 100%;
+  line-height: 16px;
+}
+
+.input:hover,
+.input:focus,
+.input:active,
+.input:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.input::placeholder {
+  font-size: 14px;
 }

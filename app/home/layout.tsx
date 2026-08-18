@@ -29,7 +29,7 @@ export default function HomeLayout({
         avatarUrl={avatarUrl}
       />
 
-      <main className={styles.content}>{children}</main>
+      <main>{children}</main>
     </div>
   );
 }

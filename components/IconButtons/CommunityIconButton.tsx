@@ -1,4 +1,5 @@
 import styles from "./Icons.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 interface ProfileIconProps {
   onClick?: () => void;
@@ -31,7 +32,9 @@ export function CommunityIconButton({ onClick, selected }: ProfileIconProps) {
           clipRule="evenodd"
         />
       </svg>
-      <span className={styles.tooltip}>Comunidades</span>
+      <span className={styles.tooltip}>
+        {tSystemMessage("tooltip_communities", "Comunidades")}
+      </span>
     </div>
   );
 }

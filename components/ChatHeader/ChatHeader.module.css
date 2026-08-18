@@ -1,0 +1,47 @@
+.header {
+  height: 64px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+
+  background-color: var(--whatsapp-dark-secundary-background);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detailsContent {
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+}
+
+.textDetails {
+  height: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 16px;
+  font-family: var(--font-family);
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--whatsapp-dark-text-secondary);
+}
+
+.image {
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.actions {
+  /* height: 44px;
+  width: 30px; */
+
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}

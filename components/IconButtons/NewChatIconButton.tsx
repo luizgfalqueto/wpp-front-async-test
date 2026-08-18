@@ -1,4 +1,5 @@
 import styles from "./Icons.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 interface ProfileIconProps {
   onClick?: () => void;
@@ -26,7 +27,9 @@ export function NewChatIconButton({ onClick }: ProfileIconProps) {
           clipRule="evenodd"
         />
       </svg>
-      <span className={styles.tooltipBottom}>Nova conversa</span>
+      <span className={styles.tooltipBottom}>
+        {tSystemMessage("tooltip_new_conversation", "Nova conversa")}
+      </span>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./ProfileIcon.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 interface ProfileIconProps {
   onClick?: () => void;
@@ -18,7 +19,9 @@ export function ProfileIcon({ onClick, avatarUrl }: ProfileIconProps) {
           className={styles.image}
         />
       </div>
-      <span className={styles.tooltip}>Você</span>
+      <span className={styles.tooltip}>
+        {tSystemMessage("tooltip_you", "Você")}
+      </span>
     </div>
   );
 }

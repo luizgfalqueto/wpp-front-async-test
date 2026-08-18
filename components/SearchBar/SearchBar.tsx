@@ -1,4 +1,5 @@
 import styles from "./SearchBar.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 type SearchBarProps = {
   onSearch: (text: string) => void;
@@ -11,7 +12,10 @@ export function SearchBar({ onSearch, value, onClear }: SearchBarProps) {
     <div className={styles.container}>
       <input
         type="text"
-        placeholder="Pesquisar ou começar uma nova conversa"
+        placeholder={tSystemMessage(
+          "search_bar_placeholder",
+          "Pesquisar ou começar uma nova conversa"
+        )}
         className={styles.input}
         value={value}
         onChange={(event) => onSearch(event.target.value)}
