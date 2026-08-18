@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { WhatsAppTextLogo } from "@/components/WhatsApp/WhatsAppText";
 import { NewChatIconButton } from "@/components/IconButtons/NewChatIconButton";
 import { MoreOptionsIconButton } from "@/components/IconButtons/MoreOptionsIconButton";
@@ -20,12 +21,11 @@ export default function ChatLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const [searchContent, setSearchContent] = useState("");
   const [filterApplyed, setFilterApplyed] = useState<FilterType>("All");
 
   const chats = useChatStore((state) => state.chats);
-
-  const selectedChat = useChatStore((state) => state.selectedChat);
 
   function selectFilter(filter: FilterType) {
     if (filter === "All") {
@@ -71,18 +71,22 @@ export default function ChatLayout({
       );
     })
     .sort((a, b) => {
-      // Fixa primeiro
       if (a.pinned !== b.pinned) {
         return Number(b.pinned) - Number(a.pinned);
       }
 
-      // Depois não lidas
       const aUnread = a.unreadCount > 0;
 
       const bUnread = b.unreadCount > 0;
 
       return Number(bUnread) - Number(aUnread);
     });
+
+  useEffect(() => {
+    if (chats.length === 0) {
+      router.replace("/");
+    }
+  }, [chats.length, router]);
 
   return (
     <div className={styles.layoutWrapper}>
@@ -114,7 +118,7 @@ export default function ChatLayout({
       </aside>
 
       <div className={styles.main}>
-        {selectedChat !== null && <ChatHeader chat={selectedChat} />}
+        <ChatHeader />
 
         {children}
       </div>

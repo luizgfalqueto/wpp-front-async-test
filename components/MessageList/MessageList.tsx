@@ -1,5 +1,6 @@
-import { Chat } from "@/types/chat";
 import { Message } from "@/types/message";
+
+import { useChatStore } from "@/stores/useChatStore";
 
 import { getChatParticipantById } from "@/utils/helpers/contactHelper";
 import { generateSenderColor } from "@/utils/helpers/colorHelper";
@@ -10,21 +11,21 @@ import { MessageTail } from "../MessageTail/MessageTail";
 import { MessageStatusIcon } from "../MessageStatusIcon/MessageStatusIcon";
 
 type MessageListProps = {
-  chat: Chat | null;
+  selectedChatId: string | null | undefined;
 };
 
-export default function MessageList({ chat }: MessageListProps) {
-  const messages = chat
-    ? renderMessages(chat.messages, chat.type === "group")
-    : [];
+export default function MessageList({ selectedChatId }: MessageListProps) {
+  const chat = useChatStore(
+    (state) => state.chats.find((chat) => chat.id === selectedChatId) ?? null
+  );
 
-  if (messages.length == 0) {
+  if (!chat) {
     return <p>Nenhuma conversa</p>;
   }
 
   return (
     <div className={styles.messageInnerContainer}>
-      {messages.map((message) => message)}
+      {renderMessages([...chat.messages].reverse(), chat.type === "group")}
     </div>
   );
 }

@@ -40,13 +40,13 @@ export function ChatList({
 }
 
 function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
-  const selectedChat = useChatStore((state) => state.selectedChat);
+  const selectedChatId = useChatStore((state) => state.selectedChatId);
 
   const setSelectedChat = useChatStore((state) => state.setSelectedChat);
 
   const setUnreadChat = useChatStore((state) => state.setUnreadCount);
 
-  const isSelected = chat.id === selectedChat?.id;
+  const isSelected = chat.id === selectedChatId;
 
   const lastMessage: Message | undefined = chat.messages.find(
     (message) => message.id === chat.lastMessageId
@@ -97,7 +97,7 @@ function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
   return (
     <Link
       onClick={() => {
-        setSelectedChat(chat);
+        setSelectedChat(chat.id);
         setUnreadChat(chat.id, 0);
       }}
       className={styles.link}

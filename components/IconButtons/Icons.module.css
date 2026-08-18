@@ -15,6 +15,18 @@
   background-color: var(--whatsapp-dark-primary);
 }
 
+.containerSendButton {
+  height: 36px;
+  width: 45px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  background-color: var(--whatsapp-dark-primary);
+  position: relative;
+}
+
 .containerSelected {
   height: 40px;
   width: 40px;

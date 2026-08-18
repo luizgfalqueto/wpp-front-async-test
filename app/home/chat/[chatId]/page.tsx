@@ -1,24 +1,46 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { getChatById } from "@/utils/helpers/chatHelper";
+import { useChatStore } from "@/stores/useChatStore";
 import styles from "../page.module.css";
 import { AttachIconButton } from "@/components/IconButtons/AttachIconButton";
 import { StickerIconButton } from "@/components/IconButtons/StickerIconButton";
 import { RecordIconButton } from "@/components/IconButtons/RecordIconButton";
 import MessageList from "@/components/MessageList/MessageList";
+import { Message } from "@/types/message";
+import { SendMessageIconButton } from "@/components/IconButtons/SendMessageIconButton";
+import { useState } from "react";
+import { simulateMessageStatus } from "@/services/messageStatusService";
 
 export default function ChatPage() {
-  const pathName = usePathname();
+  const selectedChatId = useChatStore((state) => state.selectedChatId);
+  const [inputText, setInputText] = useState<string>("");
 
-  const activeChat = pathName.split("/")[3];
+  const addMessage = useChatStore((state) => state.addMessage);
 
-  const chat = getChatById(activeChat);
+  function sendMessage(text: string) {
+    console.log(text);
+    if (!selectedChatId) return;
+
+    const message: Message = {
+      id: crypto.randomUUID(),
+      chatId: selectedChatId,
+      senderId: "me",
+      timestamp: new Date().toISOString(),
+      type: "text",
+      text,
+      status: "sending",
+    };
+
+    addMessage(selectedChatId, message);
+    setInputText("");
+
+    simulateMessageStatus(selectedChatId, message.id);
+  }
 
   return (
     <div className={styles.chatContainer}>
       <div className={styles.messageContainer}>
-        <MessageList chat={chat} />
+        <MessageList selectedChatId={selectedChatId} />
       </div>
       <div className={styles.bottomBar}>
         <AttachIconButton />
@@ -27,8 +49,19 @@ export default function ChatPage() {
           type="text"
           placeholder="Digite uma mensagem"
           className={styles.input}
+          value={inputText}
+          onChange={(event) => setInputText(event.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              sendMessage(inputText);
+            }
+          }}
         />
-        <RecordIconButton />
+        {inputText === "" && <RecordIconButton />}
+        {inputText !== "" && (
+          <SendMessageIconButton onSend={() => sendMessage(inputText)} />
+        )}
       </div>
     </div>
   );
