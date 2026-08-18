@@ -3,13 +3,14 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Filter.module.css";
 import { FilterType } from "@/types/filter";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 const filters: FilterType[] = ["All", "Unread", "Group"];
 
 const filterLabels: Record<FilterType, string> = {
-  All: "Todos",
-  Unread: "Não lidos",
-  Group: "Grupos",
+  All: tSystemMessage("filter_all", "Todos"),
+  Unread: tSystemMessage("filter_unreads", "Não lidos"),
+  Group: tSystemMessage("filter_groups", "Grupos"),
 };
 
 type ButtonProps = {

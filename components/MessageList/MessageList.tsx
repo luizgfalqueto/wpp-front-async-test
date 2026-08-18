@@ -7,6 +7,7 @@ import styles from "../../app/home/chat/page.module.css";
 import messageStyles from "../../app/home/chat/[chatId]/Message.module.css";
 import { MessageTail } from "../MessageTail/MessageTail";
 import { MessageStatusIcon } from "../MessageStatusIcon/MessageStatusIcon";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 type MessageListProps = {
   selectedChatId: string | null | undefined;
@@ -222,7 +223,9 @@ function getMessageContentByType(message: Message) {
 function systemMessage(id: string, message: string) {
   return (
     <div key={message} className={messageStyles.systemMessage}>
-      <p className={messageStyles.systemMessageText}>{message}</p>
+      <p className={messageStyles.systemMessageText}>
+        {tSystemMessage(id, message)}
+      </p>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import styles from "./Icons.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 interface ProfileIconProps {
   onClick?: () => void;
@@ -55,7 +56,9 @@ export function ChannelsIconButton({ onClick, selected }: ProfileIconProps) {
           clipRule="evenodd"
         />
       </svg>
-      <span className={styles.tooltip}>Canais</span>
+      <span className={styles.tooltip}>
+        {tSystemMessage("tooltip_channels", "Canais")}
+      </span>
     </div>
   );
 }

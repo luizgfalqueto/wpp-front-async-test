@@ -1,4 +1,5 @@
 import styles from "./Icons.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 type SendProps = {
   onSend: () => void;
@@ -16,7 +17,9 @@ export function SendMessageIconButton({ onSend }: SendProps) {
       >
         <path d="M5.4 19.43a.99.99 0 0 1-.95-.1.93.93 0 0 1-.45-.83V14l8-2-8-2V5.5c0-.37.15-.65.45-.84a1 1 0 0 1 .95-.09l15.4 6.5c.42.19.63.5.63.93 0 .43-.21.74-.63.93l-15.4 6.5Z" />
       </svg>
-      <span className={styles.tooltipTop}>Enviar mensagem</span>
+      <span className={styles.tooltipTop}>
+        {tSystemMessage("tooltip_send_message", "Enviar mensagem")}
+      </span>
     </div>
   );
 }

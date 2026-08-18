@@ -115,7 +115,7 @@
 .containerSelected:hover .tooltip,
 .container:hover .tooltip,
 .container:hover .tooltipBottom,
-.container:hover .tooltipTop {
+.container:hover .tooltipTop .containerGreen:hover .tooltipTop {
   visibility: visible;
   opacity: 1;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 import { useChatStore } from "@/stores/useChatStore";
 import styles from "../page.module.css";
 import { AttachIconButton } from "@/components/IconButtons/AttachIconButton";
@@ -47,7 +48,10 @@ export default function ChatPage() {
         <StickerIconButton />
         <input
           type="text"
-          placeholder="Digite uma mensagem"
+          placeholder={tSystemMessage(
+            "input_message_placeholder",
+            "Digite uma mensagem"
+          )}
           className={styles.input}
           value={inputText}
           onChange={(event) => setInputText(event.target.value)}

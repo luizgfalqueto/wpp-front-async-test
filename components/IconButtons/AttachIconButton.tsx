@@ -1,4 +1,5 @@
 import styles from "./Icons.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 export function AttachIconButton() {
   return (
@@ -16,7 +17,9 @@ export function AttachIconButton() {
           d="M11 13H5.5a1 1 0 1 1 0-2H11V5.5a1 1 0 1 1 2 0V11h5.5a1 1 0 1 1 0 2H13v5.5a1 1 0 1 1-2 0V13Z"
         ></path>
       </svg>
-      <span className={styles.tooltipTop}>Anexar</span>
+      <span className={styles.tooltipTop}>
+        {tSystemMessage("tooltip_attach", "Anexar")}
+      </span>
     </div>
   );
 }

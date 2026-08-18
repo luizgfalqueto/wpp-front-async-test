@@ -11,6 +11,8 @@ import Image from "next/image";
 import styles from "./Loading.module.css";
 import { ProgressBar } from "../components/ProgressBar/ProgressBar";
 
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
+
 export default function Loading() {
   const [progress, setProgress] = useState(0);
 
@@ -54,7 +56,10 @@ export default function Loading() {
     <main className={styles.container}>
       <Image
         src="/images/logo_black.png"
-        alt="Logo do WhatsApp na cor preta"
+        alt={tSystemMessage(
+          "whatsapp_logo_alt",
+          "Logo do WhatsApp na cor preta"
+        )}
         width={50}
         height={50}
       />
@@ -67,7 +72,10 @@ export default function Loading() {
         <Image src="/icons/lock.png" alt="" width={10} height={10} />
 
         <p className={styles.text}>
-          Protegida com a criptografia de ponta a ponta
+          {tSystemMessage(
+            "loading",
+            "Protegida com a criptografia de ponta a ponta"
+          )}
         </p>
       </div>
     </main>

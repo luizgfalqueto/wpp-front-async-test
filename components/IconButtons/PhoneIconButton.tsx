@@ -1,4 +1,5 @@
 import styles from "./Icons.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 interface ProfileIconProps {
   onClick?: () => void;
@@ -38,7 +39,7 @@ export function PhoneIconButton({
         />
       </svg>
       <span className={tooltipInBottom ? styles.tooltipBottom : styles.tooltip}>
-        Ligação de voz
+        {tSystemMessage("tooltip_voice_call", "Ligação de voz")}
       </span>
     </div>
   );

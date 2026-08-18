@@ -1,3 +1,4 @@
+import { tSystemMessage } from "../internacionalization/tMessages";
 /**
  * Formats a timestamp into a user-friendly string based on how long ago it was.
  * 
@@ -25,13 +26,13 @@ export const formatMessageDate = (timestamp: string | undefined, isSeparator = f
 
   // Today
   if (diffInDays === 0) {
-    if(isSeparator) return "Hoje";
+    if(isSeparator) return tSystemMessage("today", "hoje");
     return new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' }).format(date);
   }
 
   // Yesterday
   if (diffInDays === 1) {
-    return 'Ontem';
+    return tSystemMessage("yestarday", "ontem");
   }
 
   // Within last 7 days

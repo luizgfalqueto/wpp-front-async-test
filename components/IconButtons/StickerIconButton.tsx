@@ -1,4 +1,5 @@
 import styles from "./Icons.module.css";
+import { tSystemMessage } from "@/utils/internacionalization/tMessages";
 
 export function StickerIconButton() {
   return (
@@ -23,7 +24,9 @@ export function StickerIconButton() {
           d="M16.82 19.98A6.97 6.97 0 0 1 12 22H9.27A7.27 7.27 0 0 1 2 14.73V9.27A7.27 7.27 0 0 1 9.27 2h5.46A7.27 7.27 0 0 1 22 9.27v2.54c0 1.94-.77 3.8-2.15 5.17l-3.03 3ZM14.72 4H9.28A5.27 5.27 0 0 0 4 9.27v5.46A5.27 5.27 0 0 0 9.27 20h2.06a.9.9 0 0 0 .68-.88l-.02-2.26v-.11a5.5 5.5 0 0 1-4.65-2.6.6.6 0 0 1 .03-.6c.12-.2.3-.3.53-.3h5.7a4.8 4.8 0 0 1 3.22-1.23l2.26.01c.5 0 .9-.4.9-.9V9.07H20A5.27 5.27 0 0 0 14.73 4Zm-.71 15.11c0 .15-.01.3-.04.44a4.96 4.96 0 0 0 1.44-.99l3.03-3c.46-.46.83-.99 1.09-1.56-.15.02-.3.03-.46.03h-2.26A2.8 2.8 0 0 0 14 16.84l.02 2.26Z"
         />
       </svg>
-      <span className={styles.tooltipTop}>Ligação de voz</span>
+      <span className={styles.tooltipTop}>
+        {tSystemMessage("tooltip_stickers", "Emojis, GIFs e figurinhas")}
+      </span>
     </div>
   );
 }
