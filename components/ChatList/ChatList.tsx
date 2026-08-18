@@ -24,33 +24,43 @@ export function ChatList({
   searchText: string;
   onClearFilters: ((filter: FilterType) => void) | null;
 }) {
-  if (chats.length == 0) {
+  if (chats.length === 0) {
     return (
       <NotFound
-        text={"Nenhuma conversa, contato ou mensagem encontrada"}
-        textButton={"Pesquisar em todas as conversas"}
+        text="Nenhuma conversa, contato ou mensagem encontrada"
+        textButton="Pesquisar em todas as conversas"
         onPress={onClearFilters !== null ? () => onClearFilters("All") : null}
       />
     );
   }
+
   return chats.map((chat) => (
     <ChatItem key={chat.id} chat={chat} searchText={searchText} />
   ));
 }
 
 function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
-  const isSelected =
-    chat.id === useChatStore((state) => state.selectedChat)?.id;
-
-  const lastMessage: Message | undefined = chat.messages.find((message) => {
-    return message.id == chat.lastMessageId;
-  });
+  const selectedChat = useChatStore((state) => state.selectedChat);
 
   const setSelectedChat = useChatStore((state) => state.setSelectedChat);
 
+  const setUnreadChat = useChatStore((state) => state.setUnreadCount);
+
+  const isSelected = chat.id === selectedChat?.id;
+
+  const lastMessage: Message | undefined = chat.messages.find(
+    (message) => message.id === chat.lastMessageId
+  );
+
   const getMessageText = (message: Message): string => {
-    if (message.type === "text") return message.text;
-    if (message.type === "system") return message.system.text;
+    if (message.type === "text") {
+      return message.text;
+    }
+
+    if (message.type === "system") {
+      return message.system.text;
+    }
+
     return "Media/Outro";
   };
 
@@ -86,7 +96,10 @@ function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
 
   return (
     <Link
-      onClick={() => setSelectedChat(chat)}
+      onClick={() => {
+        setSelectedChat(chat);
+        setUnreadChat(chat.id, 0);
+      }}
       className={styles.link}
       href={`/home/chat/${chat.id}`}
     >
@@ -94,30 +107,38 @@ function ChatItem({ chat, searchText }: { chat: Chat; searchText: string }) {
         <div className={styles.imageContent}>
           <Image
             src={chat.avatarUrl || "/images/person.jpg"}
-            alt="Image do avatar da conversa"
+            alt="Imagem do avatar da conversa"
             width={48}
             height={48}
             className={styles.image}
           />
         </div>
+
         <div className={styles.rightContent}>
           <div className={styles.topContent}>
             <p>{highlightText(chat.name, searchText)}</p>
+
             <p className={styles.timestamp}>
               {formatMessageDate(lastMessage?.timestamp || "")}
             </p>
           </div>
+
           <div className={styles.lastMessage}>
             <div className={styles.prefix}>
               {lastMessage?.senderId === "me" && (
-                <CheckReadMessageIcon status={lastMessage?.status} />
+                <CheckReadMessageIcon status={lastMessage.status} />
               )}
-              {lastSender != null && `${lastSender.name}:`}
+
+              {lastSender !== null && `${lastSender.name}:`}
+
               <p className={styles.lastMessageText}>{lastMessageText}</p>
             </div>
+
             <div className={styles.suffix}>
               {chat.pinned && <PinnedChat />}
+
               {chat.unreadCount > 0 && <UnreadChat count={chat.unreadCount} />}
+
               {chat.muted && <MutedChat />}
             </div>
           </div>

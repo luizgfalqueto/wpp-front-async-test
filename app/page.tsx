@@ -1,15 +1,22 @@
 "use client";
 
+import data from "@/database/db.json";
+import { mapToChat } from "@/utils/mappers/chatMapper";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useChatStore } from "@/stores/useChatStore";
+
 import Image from "next/image";
 import styles from "./Loading.module.css";
-import { ProgressBar } from "..//components/ProgressBar/ProgressBar";
+import { ProgressBar } from "../components/ProgressBar/ProgressBar";
 
 export default function Loading() {
-  const [progress, setProgress] = useState<number>(0);
+  const [progress, setProgress] = useState(0);
+
   const router = useRouter();
+
+  const setChats = useChatStore((state) => state.setChats);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -35,9 +42,13 @@ export default function Loading() {
 
   useEffect(() => {
     if (progress >= 100) {
+      const chats = data.chats.map(mapToChat);
+
+      setChats(chats);
+
       router.push("/home");
     }
-  }, [progress, router]);
+  }, [progress, router, setChats]);
 
   return (
     <main className={styles.container}>
@@ -47,10 +58,14 @@ export default function Loading() {
         width={50}
         height={50}
       />
+
       <h1 className={styles.title}>WhatsApp</h1>
+
       <ProgressBar value={progress} />
+
       <div className={styles.textContainer}>
         <Image src="/icons/lock.png" alt="" width={10} height={10} />
+
         <p className={styles.text}>
           Protegida com a criptografia de ponta a ponta
         </p>
