@@ -138,3 +138,24 @@
   line-height: 16px;
   color: var(--whatsapp-dark-primary);
 }
+
+.dateSeparatorContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.dateSeparator {
+  padding: 6px 8px;
+  background-color: var(--whatsapp-dark-input-chat-background);
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
+.dateSeparator span {
+  font-family: var(--font-family);
+  font-size: 12px;
+  color: var(--whatsapp-dark-text-secondary);
+}

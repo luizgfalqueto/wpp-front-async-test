@@ -10,7 +10,7 @@
  * @param timestamp - The ISO string or timestamp to format
  * @returns Formatted date string
  */
-export const formatMessageDate = (timestamp: string | undefined): string => {
+export const formatMessageDate = (timestamp: string | undefined, isSeparator = false): string => {
   if(timestamp == undefined) {
     return "";
   }
@@ -25,6 +25,7 @@ export const formatMessageDate = (timestamp: string | undefined): string => {
 
   // Today
   if (diffInDays === 0) {
+    if(isSeparator) return "Hoje";
     return new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' }).format(date);
   }
 
@@ -40,4 +41,8 @@ export const formatMessageDate = (timestamp: string | undefined): string => {
 
   // Otherwise
   return new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(date);
+};
+
+export const formatSeparatorMessageDate = (timestamp: string | undefined): string => {
+  return formatMessageDate(timestamp, true);
 };

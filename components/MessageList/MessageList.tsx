@@ -1,10 +1,8 @@
 import { Message } from "@/types/message";
-
 import { useChatStore } from "@/stores/useChatStore";
-
 import { getChatParticipantById } from "@/utils/helpers/contactHelper";
 import { generateSenderColor } from "@/utils/helpers/colorHelper";
-
+import { formatSeparatorMessageDate } from "@/utils/helpers/dateHelper";
 import styles from "../../app/home/chat/page.module.css";
 import messageStyles from "../../app/home/chat/[chatId]/Message.module.css";
 import { MessageTail } from "../MessageTail/MessageTail";
@@ -13,6 +11,10 @@ import { MessageStatusIcon } from "../MessageStatusIcon/MessageStatusIcon";
 type MessageListProps = {
   selectedChatId: string | null | undefined;
 };
+
+type MessageListItem =
+  | { type: "message"; message: Message }
+  | { type: "dateSeparator"; date: string };
 
 export default function MessageList({ selectedChatId }: MessageListProps) {
   const chat = useChatStore(
@@ -31,9 +33,51 @@ export default function MessageList({ selectedChatId }: MessageListProps) {
 }
 
 function renderMessages(messages: Message[], isGroup: boolean) {
-  return messages.map((message, index) => {
-    const isLoggedSender = message.senderId === "me";
+  const messagesWithDates: MessageListItem[] = [];
+
+  messages.forEach((message, index) => {
     const nextMessage = messages[index + 1];
+
+    messagesWithDates.push({
+      type: "message",
+      message,
+    });
+
+    const currentDate = new Date(message.timestamp).toLocaleDateString("pt-BR");
+
+    const nextDate = nextMessage
+      ? new Date(nextMessage.timestamp).toLocaleDateString("pt-BR")
+      : null;
+
+    if (currentDate !== nextDate) {
+      messagesWithDates.push({
+        type: "dateSeparator",
+        date: formatSeparatorMessageDate(message.timestamp),
+      });
+    }
+  });
+
+  return messagesWithDates.map((item, index) => {
+    if (item.type === "dateSeparator") {
+      return (
+        <div
+          key={`date-${item.date}-${index}`}
+          className={messageStyles.dateSeparatorContainer}
+        >
+          <div className={messageStyles.dateSeparator}>
+            <span>{item.date}</span>
+          </div>
+        </div>
+      );
+    }
+
+    const message = item.message;
+
+    const isLoggedSender = message.senderId === "me";
+    const nextItem = messagesWithDates[index + 1];
+
+    const nextMessage =
+      nextItem?.type === "message" ? nextItem.message : undefined;
 
     const hasSameSenderAfter = nextMessage?.senderId === message.senderId;
 
@@ -41,6 +85,7 @@ function renderMessages(messages: Message[], isGroup: boolean) {
       hour: "2-digit",
       minute: "2-digit",
     });
+
     const otherSender = getChatParticipantById(message.senderId);
     const colorSenderName = generateSenderColor(message.senderId);
 
@@ -49,6 +94,7 @@ function renderMessages(messages: Message[], isGroup: boolean) {
     if (message.deleted) {
       return <span key={message.id}></span>;
     }
+
     if (message.type === "system") {
       return systemMessage(message.id, message.system.text);
     } else {
